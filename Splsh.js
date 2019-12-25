@@ -5,16 +5,20 @@ import {View , Text, StyleSheet} from 'react-native';
 export default class Splsh extends Component {
     render() {
         return (
-            <View style ={style.wrapper}>
-                <Text style = {style.title}>'Hello World!'</Text>
-                <Text style = {style.subtitle}>'Powered by react native</Text>
+            <View style ={styles.wrapper}>
+                <View style = {styles.titlewrapper}>
+                    <Text style = {styles.title}>'Hello World!'</Text>
+                </View>
+                <View>
+                    <Text style = {styles.subtitle}>'Powered by react native</Text>
+                </View>
             </View>
         );
     }
 }
 
-const style = StyleSheet.create({
-    wrapper: {backgroundColor: 'darkblue', 
+const styles = StyleSheet.create({
+    wrapper: {backgroundColor: '#27ae60', 
     flex:1, 
     alignItems: 'center', 
     justifyContent:'center'
@@ -26,6 +30,12 @@ const style = StyleSheet.create({
     },
     subtitle: {
         color:'white',
-        fontWeight:'lighter'
+        fontWeight:'normal',
+        paddingBottom: 20
+    },
+    titlewrapper: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems:'center'
     }
 });
