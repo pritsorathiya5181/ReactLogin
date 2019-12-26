@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
 import {View , Text, StyleSheet, TextInput, TouchableOpacity, StatusBar} from 'react-native';
-
+import { createStackNavigator } from 'react-navigation-stack'; 
+import {} from 'react-navigation'   
+import RegisterPage from '../RegisterPage';
+import HomePage from '../HomePage';
+import { TouchableHighlight } from 'react-native-gesture-handler';
 
 export default class LoginForm extends Component {
     render() {
+
         return (
             <View style ={styles.container}>
                 <StatusBar 
@@ -15,7 +20,7 @@ export default class LoginForm extends Component {
                     placeholder="username or email"
                     placeholderTextColor = 'white'
                     returnKeyType="next" 
-                    onSubmitEditing = {() => this.passwordInout.focus()}
+                    onSubmitEditing = {() => this.passwordInput.focus()}
                     keyboardType= 'email-address'
                     autoCapitalize= 'none'
                     autoCorrect= {false} />
@@ -26,15 +31,36 @@ export default class LoginForm extends Component {
                     placeholderTextColor = 'white'
                     secureTextEntry 
                     returnKeyType="go"
-                    ref = {(input) => this.passwordInout = input}/> 
+                    ref = {(input) =>this.passwordInput = input}/> 
 
-                <TouchableOpacity style = {styles.buttonContainer}>
-                    <Text style = {styles.buttonText}>Login</Text>
-                </TouchableOpacity>
+                <TouchableHighlight style = {styles.buttonContainer}>
+                    <Text style = {styles.buttonText}
+                    onPress = {() =>this.navigation.navigate('Home')}>Login</Text>
+                </TouchableHighlight>
+
+                <Text 
+                    style = {styles.register}
+                    onPress = {() =>this.props.navigation.navigate('Register')}>
+                    Register Here</Text>
             </View>
         );
     }
 }
+
+
+export class App extends Component {
+    render(){
+        return(
+            <AppStackNavigator />
+        );
+    }
+}
+
+const AppStackNavigator = createStackNavigator ({
+    Login: LoginForm,
+    Register: RegisterPage,
+    Home: HomePage
+})
 
 const styles = StyleSheet.create({
     container:{
@@ -47,7 +73,7 @@ const styles = StyleSheet.create({
         color: '#FFF',
         paddingHorizontal: 10,
         fontSize:16,
-        opacity:0.8
+        opacity:0.8,
     },
     buttonContainer: {
         backgroundColor:'#2980b9' ,
@@ -58,5 +84,12 @@ const styles = StyleSheet.create({
         color: '#FFFFFF',
         fontSize: 18,
         fontWeight: '700'
+    },
+    register: {
+        justifyContent: 'center',
+        textAlign: 'center',
+        color: 'white',
+        opacity: 0.7,
+        paddingTop: 15
     }
 });
